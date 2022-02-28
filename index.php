@@ -57,7 +57,7 @@ header("Pragma: no-cache")
     </tr>
     <tr>
         <td colspan="4">
-            <input type="radio" name="power" id="low" /><label for="low">Slabí | Low | низкий | низький</label><br />
+            <input type="radio" name="power" id="low" /><label for="low">Slabý | Low | низкий | низький</label><br />
             <input type="radio" name="power" id="middle" checked="checked" /><label for="middle">Střední | Middle | Середина | Середній</label><br />
             <input type="radio" name="power" id="high" /><label for="high">Silný | High | Сильный | Сильний</label><br />
             <input type="radio" name="power" id="full" /><label for="full">Nejsilnější | Full | Полный | Повний</label><br />
